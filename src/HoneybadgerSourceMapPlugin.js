@@ -8,6 +8,7 @@ import reduce from 'lodash.reduce'
 import FormData from 'form-data'
 import { handleError, validateOptions } from './helpers'
 import { ENDPOINT, PLUGIN_NAME, MAX_RETRIES } from './constants'
+import resolveAllPromise from './resolveAllPromise'
 
 const fetch = fetchRetry(nodeFetch)
 
@@ -188,8 +189,11 @@ class HoneybadgerSourceMapPlugin {
 
     console.info('\n')
 
-    return Promise.all(
-      assets.map(asset => this.uploadSourceMap(compilation, asset))
+    // On large projects source maps should not all be uploaded at the same time,
+    // but in parallel with a reasonable worker count in order to avoid network issues
+    return resolveAllPromise(
+      assets.map(asset => () => this.uploadSourceMap(compilation, asset)),
+      3
     )
   }
 
