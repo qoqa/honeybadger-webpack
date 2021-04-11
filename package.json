@@ -1,6 +1,6 @@
 {
-  "name": "@honeybadger-io/webpack",
-  "version": "1.3.0-beta.0",
+  "name": "@qoqa/honeybadger_webpack",
+  "version": "2.0.1",
   "description": "Webpack plugin to upload source maps to Honeybadger's API - http://docs.honeybadger.io/guides/source-maps.html",
   "main": "./dist/HoneybadgerSourceMapPlugin.js",
   "scripts": {
@@ -19,7 +19,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/honeybadger-io/honeybadger-webpack.git"
+    "url": "git+https://github.com/qoqa/honeybadger-webpack.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "webpack",
